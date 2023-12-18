@@ -18,11 +18,9 @@ import java.util.Arrays;
 @SpringBootTest
 @ActiveProfiles("test")
 abstract class BaseTests {
-
     private static final int CONTAINER_PORT = 5433;
     private static final int LOCAL_PORT = 5432;
     private static final PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:14.3");
-
     @BeforeAll
     static void runContainer() {
                  container
@@ -32,7 +30,6 @@ abstract class BaseTests {
                 ));
         container.start();
     }
-
     @DynamicPropertySource
     static void postgresProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", container::getJdbcUrl);
