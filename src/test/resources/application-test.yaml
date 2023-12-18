@@ -3,9 +3,8 @@ spring:
   init:
     mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/jira
-    username: ${test.database.username}
-    password: ${test.database.password}
+    username: test
+    password: test
   jpa:
     hibernate:
       ddl-auto: validate
