@@ -151,6 +151,21 @@ public class TaskController {
         activityService.delete(id);
     }
 
+    @PatchMapping("/{id}/addtag")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addTag(@PathVariable long id, @NotBlank @RequestParam String tag) {
+        log.info("add tag '{}' to task with id={}", tag, id);
+        taskService.addTag(id, tag);
+    }
+
+    @PatchMapping("/{id}/removetag")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeTag(@PathVariable long id, @NotBlank @RequestParam String tag) {
+        log.info("remove tag '{}' from task with id={}", tag, id);
+        taskService.removeTag(id, tag);
+    }
+
+
     private record TaskTreeNode(TaskTo taskTo, List<TaskTreeNode> subNodes) implements ITreeNode<TaskTo, TaskTreeNode> {
         public TaskTreeNode(TaskTo taskTo) {
             this(taskTo, new LinkedList<>());
