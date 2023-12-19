@@ -12,7 +12,7 @@ import java.util.Properties;
 @EnableConfigurationProperties(AppProperties.class)
 @EnableCaching
 public class JiraRushApplication {
-
+//test
     public static void main(String[] args) {
         var springApplication = new SpringApplication(JiraRushApplication.class);
         Properties properties = new Properties();
