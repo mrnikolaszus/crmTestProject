@@ -2,6 +2,7 @@ package com.javarush.jira.profile.internal.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.jira.AbstractControllerTest;
+import com.javarush.jira.login.AuthUser;
 import com.javarush.jira.profile.ContactTo;
 import com.javarush.jira.profile.ProfileTo;
 import org.junit.jupiter.api.Test;
@@ -13,14 +14,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Set;
 
 import static com.javarush.jira.login.internal.web.UserTestData.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
 
     private static final String REST_URL_API_PROFILE = "/api/profile";
     public static ProfileTo USER_PROFILE_TO = new ProfileTo(null,
@@ -105,6 +106,21 @@ class ProfileRestControllerTest extends AbstractControllerTest {
                 .content(WRONG_JSON))
                 .andExpect(status().isInternalServerError());
     }
+
+
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void get() throws Exception {
+        AuthUser authUser = new AuthUser(user);
+
+        perform(MockMvcRequestBuilders.get(REST_URL_API_PROFILE))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.mailNotifications").isArray())
+                .andExpect(jsonPath("$.contacts").isArray());
+    }
+
 
 
 }
