@@ -34,5 +34,6 @@
 5. Сделаны тесты для ProgileRestController
 6. Переписан IO на NIO
 7. Написаны методы для task_tag (удаление и добавление) без фронта
+
 9 и 10 задание выполнены: Написать Dockerfile и docker-compose
 ...
