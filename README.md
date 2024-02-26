@@ -39,7 +39,7 @@
 
 Использована библиотека TestContainers, что бы динамически поднимать postgres контейнер для тестов
 
-Сделаны тесты для ProgileRestController
+Сделаны тесты для ProfileRestController
 
 Переписан IO на NIO
 
